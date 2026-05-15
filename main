@@ -1,0 +1,191 @@
+// ==UserScript==
+// @name         Roblox Home
+// @namespace    http://tampermonkey.net/
+// @version      1.1
+// @description  Тёмный фон
+// @author       fluouliss
+// @match        https://www.pekora.zip/*
+// @match        *https://www.pekora.zip/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=pekora.zip
+// @grant        GM_addStyle
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    function markBuyPlayButtons() {
+        const allButtons = document.querySelectorAll('button, .btn, a[role="button"]');
+        allButtons.forEach(btn => {
+            const text = btn.textContent.trim().toLowerCase();
+            if (text === 'buy' || text === 'play') {
+                btn.classList.add('pekora-buy-play-btn');
+            }
+        });
+    }
+    window.addEventListener('load', markBuyPlayButtons);
+    setTimeout(markBuyPlayButtons, 2000);
+
+    GM_addStyle(`
+        /* ============================================
+           ОСНОВНОЙ ФОН
+        ============================================ */
+        html, body {
+            background-color: #0b0e11 !important;
+            background-image: radial-gradient(ellipse at 50% 0%, #1a1f26 0%, #0b0e11 60%) !important;
+            background-attachment: fixed !important;
+            color: #ffffff !important;
+            font-family: "Source Sans Pro", "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif !important;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ============================================
+           НАВБАР
+        ============================================ */
+        .row-0-2-39.row {
+            background-color: #15181d !important;
+            transition: background-color 0.3s ease !important;
+        }
+
+        /* ============================================
+           САЙДБАР
+        ============================================ */
+        .card-0-2-80.card-d0-0-2-87 {
+            background-color: #15181d !important;
+            transition: background-color 0.3s ease !important;
+        }
+
+        /* ============================================
+           КНОПКИ BUY / PLAY – НЕЖНО‑ЗЕЛЁНЫЙ HOVER
+        ============================================ */
+        .pekora-buy-play-btn {
+            transition: all 0.3s ease !important;
+        }
+        .pekora-buy-play-btn:hover {
+            background-color: #2d5a27 !important;  /* спокойный зелёный */
+            border-color: #6bc96b !important;
+            box-shadow: 0 0 12px rgba(107, 201, 107, 0.6) !important;
+            color: #ffffff !important;
+        }
+
+        /* ============================================
+           ОСТАЛЬНЫЕ КНОПКИ (как в Roblox)
+        ============================================ */
+        .btn, .button, button[type="submit"], button[type="button"] {
+            background-color: #181b20 !important;
+            color: #ffffff !important;
+            border: 1px solid #333840 !important;
+            border-radius: 8px !important;
+            padding: 8px 16px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+        }
+        .btn:hover, .button:hover, button[type="submit"]:hover, button[type="button"]:hover {
+            background-color: #23282f !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 0 8px rgba(255,255,255,0.15) !important;
+        }
+
+        /* ============================================
+           ПОЛЯ ВВОДА
+        ============================================ */
+        input[type="text"], input[type="search"], textarea, select {
+            background-color: #1e2126 !important;
+            color: #ffffff !important;
+            border: 1px solid #3a3f47 !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #ffffff !important;
+            box-shadow: 0 0 6px rgba(255,255,255,0.3) !important;
+            outline: none !important;
+        }
+
+        /* ============================================
+           ССЫЛКИ
+        ============================================ */
+        a {
+            color: #b0b5bd !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+        }
+        a:hover {
+            color: #ffffff !important;
+        }
+
+        /* ============================================
+           КАРТОЧКИ / ПЛИТКИ
+        ============================================ */
+        .card, .item, .product, .box, article, .block, .panel, .widget {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            border-radius: 12px !important;
+            padding: 16px !important;
+            margin: 8px !important;
+            transition: all 0.3s ease !important;
+        }
+        .card:hover, .item:hover, .product:hover, .box:hover, article:hover, .block:hover, .panel:hover, .widget:hover {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+        }
+
+        /* ============================================
+           ИЗОБРАЖЕНИЯ В КАРТОЧКАХ (белая обводка при наведении)
+        ============================================ */
+        .card img, .item img, .product img, img.icon, img.thumbnail, .item-image img {
+            border-radius: 8px !important;
+            border: 2px solid transparent !important;
+            transition: all 0.3s ease !important;
+        }
+        .card:hover img, .item:hover img, .product:hover img, .box:hover img.icon, .item-image:hover img {
+            border-color: #ffffff !important;
+            box-shadow: 0 0 10px rgba(255,255,255,0.4) !important;
+        }
+
+        /* ============================================
+           ТИПОГРАФИКА
+        ============================================ */
+        h1, h2, h3, h4, h5, h6 { color: #ffffff !important; font-weight: 700; }
+        p, span, li, div, td, th { color: #d1d5db; }
+
+        /* ============================================
+           СКРОЛЛБАР
+        ============================================ */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f1115; }
+        ::-webkit-scrollbar-thumb { background: #2a2d33; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ffffff; }
+
+        /* ============================================
+           МОДАЛЬНЫЕ ОКНА
+        ============================================ */
+        .modal, .dialog, .popup, .dropdown, .tooltip {
+            background-color: #1a1d22 !important;
+            color: #ffffff !important;
+            border: 1px solid #2f3339 !important;
+            border-radius: 8px !important;
+        }
+
+        /* ============================================
+           ТАБЛИЦЫ
+        ============================================ */
+        table { background: transparent !important; }
+        th { background: #1e2126 !important; }
+        td, th { border-bottom: 1px solid #2f3339 !important; padding: 10px; color: #ffffff; }
+
+        /* ============================================
+           ФУТЕР
+        ============================================ */
+        footer {
+            background-color: #0b0e11 !important;
+            border-top: 1px solid #22262b !important;
+        }
+    `);
+})();
