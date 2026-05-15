@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Roblox Home
+// @name         Pekora.zip theme
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.0
 // @description  Тёмный фон
 // @author       fluouliss
 // @match        https://www.pekora.zip/*
@@ -13,21 +13,9 @@
 (function() {
     'use strict';
 
-    function markBuyPlayButtons() {
-        const allButtons = document.querySelectorAll('button, .btn, a[role="button"]');
-        allButtons.forEach(btn => {
-            const text = btn.textContent.trim().toLowerCase();
-            if (text === 'buy' || text === 'play') {
-                btn.classList.add('pekora-buy-play-btn');
-            }
-        });
-    }
-    window.addEventListener('load', markBuyPlayButtons);
-    setTimeout(markBuyPlayButtons, 2000);
-
     GM_addStyle(`
         /* ============================================
-           ОСНОВНОЙ ФОН
+           ОСНОВНОЙ ФОН (как на roblox.com/home)
         ============================================ */
         html, body {
             background-color: #0b0e11 !important;
@@ -41,7 +29,7 @@
         }
 
         /* ============================================
-           НАВБАР
+           НАВБАР — точный селектор из вашего HTML
         ============================================ */
         .row-0-2-39.row {
             background-color: #15181d !important;
@@ -49,7 +37,7 @@
         }
 
         /* ============================================
-           САЙДБАР
+           САЙДБАР — точный селектор из вашего HTML
         ============================================ */
         .card-0-2-80.card-d0-0-2-87 {
             background-color: #15181d !important;
@@ -57,20 +45,7 @@
         }
 
         /* ============================================
-           КНОПКИ BUY / PLAY – НЕЖНО‑ЗЕЛЁНЫЙ HOVER
-        ============================================ */
-        .pekora-buy-play-btn {
-            transition: all 0.3s ease !important;
-        }
-        .pekora-buy-play-btn:hover {
-            background-color: #2d5a27 !important;  /* спокойный зелёный */
-            border-color: #6bc96b !important;
-            box-shadow: 0 0 12px rgba(107, 201, 107, 0.6) !important;
-            color: #ffffff !important;
-        }
-
-        /* ============================================
-           ОСТАЛЬНЫЕ КНОПКИ (как в Roblox)
+           КНОПКИ (как в Roblox)
         ============================================ */
         .btn, .button, button[type="submit"], button[type="button"] {
             background-color: #181b20 !important;
@@ -188,4 +163,5 @@
             border-top: 1px solid #22262b !important;
         }
     `);
+
 })();
